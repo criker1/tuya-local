@@ -1,0 +1,670 @@
+name: TRONIC LiFePO4 battery
+products:
+  - id: fpi7g58s9hoxlvng
+    manufacturer: TRONIC
+    model: TSPS 2240 A1
+entities:
+  - entity: sensor
+    class: battery
+    category: diagnostic
+    name: Batteriestand
+    dps:
+      - id: 1
+        type: integer
+        name: sensor
+        unit: "%"
+
+  - entity: sensor
+    name: Verbleibende Zeit
+    dps:
+      - id: 2
+        type: integer
+        name: sensor
+        unit: "min"
+
+  - entity: sensor
+    category: diagnostic
+    name: Fehler-Code
+    dps:
+      - id: 4
+        type: integer
+        name: sensor
+
+  - entity: sensor
+    class: temperature
+    name: Temperatur
+    dps:
+      - id: 10
+        type: integer
+        name: sensor
+        unit: "C"
+
+  - entity: select
+    category: config
+    name: Temperatureinheit
+    icon: "mdi:temperature-celsius"
+    dps:
+      - id: 24
+        type: string
+        name: option
+        mapping:
+          - dps_val: "c"
+            value: "Celsius"
+          - dps_val: "f"
+            value: "Fahrenheit"
+
+  - entity: sensor
+    class: energy
+    name: PV Gesamtertrag
+    dps:
+      - id: 37
+        type: integer
+        name: sensor
+        class: total_increasing
+        unit: "kWh"
+        mapping:
+          - scale: 100
+
+  - entity: sensor
+    class: energy
+    name: Batterie Lade-Gesamtmenge
+    dps:
+      - id: 102
+        type: integer
+        name: sensor
+        class: total_increasing
+        unit: "kWh"
+        mapping:
+          - scale: 100
+
+  - entity: sensor
+    class: energy
+    name: Batterie Entlade-Gesamtmenge
+    dps:
+      - id: 103
+        type: integer
+        name: sensor
+        class: total_increasing
+        unit: "kWh"
+        mapping:
+          - scale: 100
+
+  - entity: sensor
+    class: energy
+    name: "Verbrauch Gesamtmenge"
+    dps:
+      - id: 104
+        type: integer
+        name: sensor
+        class: total_increasing
+        unit: "kWh"
+        mapping:
+          - scale: 100
+
+  - entity: select
+    name: Lademodus
+    icon: "mdi:battery-sync"
+    dps:
+      - id: 105
+        type: string
+        name: option
+        mapping:
+          - dps_val: "charge_first"
+            value: "Charge First"
+          - dps_val: "charge_discharge"
+            value: "Charge & Discharge"
+
+  - entity: number
+    category: config
+    name: Entlade-Limit (DOD)
+    icon: "mdi:battery-arrow-down"
+    dps:
+      - id: 107
+        type: integer
+        name: value
+        unit: "%"
+        range:
+          min: 1
+          max: 100
+
+  - entity: number
+    category: config
+    name: Batterie Start-Schwellenwert
+    icon: "mdi:flash"
+    dps:
+      - id: 108
+        type: integer
+        name: value
+        unit: "W"
+        range:
+          min: 1
+          max: 200
+
+  - entity: sensor
+    class: enum
+    name: Betriebsstatus
+    icon: "mdi:information"
+    dps:
+      - id: 109
+        type: string
+        name: sensor
+        mapping:
+          - dps_val: "standby"
+            value: "Standby"
+          - dps_val: "charge"
+            value: "Laden"
+          - dps_val: "discharge"
+            value: "Entladen"
+
+  - entity: switch
+    category: config
+    name: Energiedaten löschen
+    icon: "mdi:delete-restore"
+    dps:
+      - id: 110
+        type: boolean
+        name: switch
+
+  - entity: button
+    category: config
+    name: Daten-Update erzwingen
+    icon: "mdi:refresh"
+    dps:
+      - id: 111
+        type: boolean
+        name: button
+
+  - entity: sensor
+    category: diagnostic
+    name: Anzahl Akkupacks
+    icon: "mdi:battery-plus"
+    dps:
+      - id: 113
+        type: integer
+        name: sensor
+        unit: "Stk"
+
+  - entity: number
+    category: config
+    name: Mikrowechselrichter Limit
+    icon: "mdi:flash"
+    dps:
+      - id: 115
+        type: integer
+        name: value
+        unit: "W"
+        state_class: measurement
+        range:
+          min: 0
+          max: 2000
+          
+  - entity: sensor
+    name: PV1 Voltage
+    class: voltage
+    dps:
+      - id: 101
+        type: base64
+        unit: "V"
+        state_class: measurement
+        name: sensor
+        mask: "00FFFF00000000000000000000"
+        mapping:
+          - scale: 10
+            scale_debounced: true
+
+  - entity: sensor
+    name: PV1 Current
+    class: current
+    dps:
+      - id: 101
+        type: base64
+        unit: "A"
+        state_class: measurement
+        name: sensor
+        mask: "000000FFFF0000000000000000"
+        mapping:
+          - scale: 100
+            scale_debounced: true
+
+  - entity: sensor
+    name: PV1 Power
+    class: power
+    dps:
+      - id: 101
+        type: base64
+        unit: "W"
+        state_class: measurement
+        name: sensor
+        mask: "0000000000FFFF000000000000"
+
+  - entity: sensor
+    name: PV2 Voltage
+    class: voltage
+    dps:
+      - id: 101
+        type: base64
+        name: sensor
+        unit: "V"
+        state_class: measurement
+        mask: "00000000000000FFFF00000000"
+        mapping:
+          - scale: 10
+            scale_debounced: true
+
+  - entity: sensor
+    name: PV2 Current
+    class: current
+    dps:
+      - id: 101
+        type: base64
+        unit: "A"
+        name: sensor
+        state_class: measurement
+        mask: "000000000000000000FFFF0000"
+        mapping:
+          - scale: 100
+            scale_debounced: true
+
+  - entity: sensor
+    name: PV2 Power
+    class: power
+    dps:
+      - id: 101
+        type: base64
+        unit: "W"
+        name: sensor
+        state_class: measurement
+        mask: "0000000000000000000000FFFF"
+
+  - entity: sensor
+    name: Battery Voltage
+    class: voltage
+    dps:
+      - id: 3
+        type: base64
+        unit: "V"
+        name: sensor
+        state_class: measurement
+        mask: "FFFF00000000"
+        mapping:
+          - scale: 10
+            scale_debounced: true
+
+  - entity: sensor
+    name: Battery Current
+    class: current
+    dps:
+      - id: 3
+        type: base64
+        unit: "A"
+        name: sensor
+        state_class: measurement
+        mask: "0000FFFF0000"
+        mapping:
+          - scale: 10
+            scale_debounced: true
+
+  - entity: sensor
+    name: Battery Power
+    class: power
+    state_class: measurement
+    dps:
+      - id: 3
+        type: base64
+        unit: "W"
+        name: sensor
+        state_class: measurement
+        mask: "00000000FFFF"
+        
+  - entity: text
+    category: config
+    name: "Entlademodus (base64)"
+    icon: "mdi:code-string"
+    dps:
+      - id: 106
+        type: string
+        name: value
+ 
+  - entity: switch
+    name: "Entladezeitplan 1"
+    icon: "mdi:calendar-check"
+    dps:
+      - id: 106
+        type: base64
+        name: switch
+        mask: "00FF00000000000000000000000000000000000000000000000000000000000000000000"
+        mapping:
+          - dps_val: 1
+            value: true
+          - dps_val: 0
+            value: false
+ 
+  - entity: number
+    name: "Entladezeitplan 1 Power"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        category: config
+        mask: "000000000000FFFF00000000000000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 2000
+
+  - entity: number
+    name: "Zeitplan 1 Start Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "0000FF000000000000000000000000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 1 Start Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "000000FF0000000000000000000000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 59
+  - entity: number
+    name: "Zeitplan 1 Ende Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "00000000FF00000000000000000000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 1 Ende Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "0000000000FF000000000000000000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 59
+          
+  - entity: switch
+    name: "Entladezeitplan 2"
+    icon: "mdi:calendar-check"
+    dps:
+      - id: 106
+        type: base64
+        name: switch
+        mask: "0000000000000000FF000000000000000000000000000000000000000000000000000000"
+        mapping:
+          - dps_val: 1
+            value: true
+          - dps_val: 0
+            value: false
+ 
+  - entity: number
+    name: "Entladezeitplan 2 Power"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        category: config
+        mask: "00000000000000000000000000FFFF000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 2000
+
+  - entity: number
+    name: "Zeitplan 2 Start Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "000000000000000000FF0000000000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 2 Start Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "00000000000000000000FF00000000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 59
+  - entity: number
+    name: "Zeitplan 2 Ende Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "0000000000000000000000FF000000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 2 Ende Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "000000000000000000000000FF0000000000000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 59
+
+  - entity: switch
+    name: "Entladezeitplan 3"
+    icon: "mdi:calendar-check"
+    dps:
+      - id: 106
+        type: base64
+        name: switch
+        mask: "000000000000000000000000000000FF0000000000000000000000000000000000000000"
+        mapping:
+          - dps_val: 1
+            value: true
+          - dps_val: 0
+            value: false
+ 
+  - entity: number
+    name: "Entladezeitplan 3 Power"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        category: config
+        mask: "0000000000000000000000000000000000000000FFFF0000000000000000000000000000"
+        range:
+          min: 0
+          max: 2000
+
+  - entity: number
+    name: "Zeitplan 3 Start Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "00000000000000000000000000000000FF00000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 3 Start Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "0000000000000000000000000000000000FF000000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 59
+  - entity: number
+    name: "Zeitplan 3 Ende Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "000000000000000000000000000000000000FF0000000000000000000000000000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 3 Ende Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "00000000000000000000000000000000000000FF00000000000000000000000000000000"
+        range:
+          min: 0
+          max: 59
+          
+  - entity: switch
+    name: "Entladezeitplan 4"
+    icon: "mdi:calendar-check"
+    dps:
+      - id: 106
+        type: base64
+        name: switch
+        mask: "0000000000000000000000000000000000000000000000FF00000000000000000000000000"
+        mapping:
+          - dps_val: 1
+            value: true
+          - dps_val: 0
+            value: false
+ 
+  - entity: number
+    name: "Entladezeitplan 4 Power"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        category: config
+        mask: "00000000000000000000000000000000000000000000000000000000FFFF00000000000000"
+        range:
+          min: 0
+          max: 2000
+
+  - entity: number
+    name: "Zeitplan 4 Start Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "000000000000000000000000000000000000000000000000FF000000000000000000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 4 Start Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "00000000000000000000000000000000000000000000000000FF0000000000000000000000"
+        range:
+          min: 0
+          max: 59
+  - entity: number
+    name: "Zeitplan 4 Ende Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "0000000000000000000000000000000000000000000000000000FF00000000000000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 4 Ende Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "000000000000000000000000000000000000000000000000000000FF000000000000000000"
+        range:
+          min: 0
+          max: 59
+  - entity: switch
+    name: "Entladezeitplan 5"
+    icon: "mdi:calendar-check"
+    dps:
+      - id: 106
+        type: base64
+        name: switch
+        mask: "000000000000000000000000000000000000000000000000000000000000FF000000000000"
+        mapping:
+          - dps_val: 1
+            value: true
+          - dps_val: 0
+            value: false
+ 
+  - entity: number
+    name: "Entladezeitplan 5 Power"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        category: config
+        mask: "0000000000000000000000000000000000000000000000000000000000000000000000FFFF"
+        range:
+          min: 0
+          max: 2000
+
+  - entity: number
+    name: "Zeitplan 5 Start Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "00000000000000000000000000000000000000000000000000000000000000FF0000000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 5 Start Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "0000000000000000000000000000000000000000000000000000000000000000FF00000000"
+        range:
+          min: 0
+          max: 59
+  - entity: number
+    name: "Zeitplan 5 Ende Stunde"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "000000000000000000000000000000000000000000000000000000000000000000FF000000"
+        range:
+          min: 0
+          max: 23
+
+  - entity: number
+    name: "Zeitplan 5 Ende Minute"
+    dps:
+      - id: 106
+        type: base64
+        name: value
+        mask: "00000000000000000000000000000000000000000000000000000000000000000000FF0000"
+        range:
+          min: 0
+          max: 59
