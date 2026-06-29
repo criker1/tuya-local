@@ -54,13 +54,13 @@ entities:
     category: config
     class: current
     dps:
-      - id: 115
+      - id: 114
         type: integer
         name: value
         unit: A
         range:
           min: 6
-          max: 32
+          max: 16
 
   - entity: number
     name: Delay
