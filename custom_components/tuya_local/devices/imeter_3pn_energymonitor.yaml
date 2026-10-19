@@ -109,8 +109,10 @@ entities:
         type: base64
         name: sensor
         optional: true
+        class: measurement
         force: true
         mask: "FFFF000000000000"
+        unit: V
         mapping:
           - scale: 10
 
@@ -126,6 +128,8 @@ entities:
         optional: true
         force: true
         mask: "0000FFFFFF000000"
+        unit: A
+        class: measurement
         mapping:
           - scale: 1000
 
@@ -141,6 +145,8 @@ entities:
         optional: true
         force: true
         mask: "0000000000FFFFFF"
+        class: measurement
+        unit: W
 
   - entity: sensor
     translation_key: voltage_x
@@ -154,6 +160,8 @@ entities:
         optional: true
         force: true
         mask: "FFFF000000000000"
+        unit: V
+        class: measurement
         mapping:
           - scale: 10
 
@@ -169,6 +177,8 @@ entities:
         optional: true
         force: true
         mask: "0000FFFFFF000000"
+        unit: A
+        class: measurement
         mapping:
           - scale: 1000
 
@@ -183,7 +193,9 @@ entities:
         name: sensor
         optional: true
         force: true
+        class: measurement
         mask: "0000000000FFFFFF"
+        unit: W
 
   - entity: sensor
     translation_key: voltage_x
@@ -197,6 +209,8 @@ entities:
         optional: true
         force: true
         mask: "FFFF000000000000"
+        unit: V
+        class: measurement
         mapping:
           - scale: 10
 
@@ -212,6 +226,8 @@ entities:
         optional: true
         force: true
         mask: "0000FFFFFF000000"
+        unit: A
+        class: measurement
         mapping:
           - scale: 1000
 
@@ -227,3 +243,5 @@ entities:
         optional: true
         force: true
         mask: "0000000000FFFFFF"
+        class: measurement
+        unit: W
